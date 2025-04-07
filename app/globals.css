@@ -6,131 +6,103 @@
 
 @layer base {
   :root {
-    /* Light mode colors */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
-
     --primary: 38 93% 53%;
     --primary-foreground: 0 0% 9%;
-
     --text: 0 0% 20%;
     --muted: 0 0% 45%;
-
     --heading: 38 93% 53%;
     --hero-subtext: 38 80% 45%;
-
     --border: 0 0% 89.8%;
     --input: 0 0% 96.1%;
     --input-border: 0 0% 89.8%;
     --input-text: 0 0% 20%;
-
     --card: 0 0% 98%;
     --card-border: 0 0% 89.8%;
     --card-overlay: 0 0% 100% / 0.7;
     --card-text: 0 0% 20%;
-
     --button: 0 0% 0%;
     --button-text: 38 93% 53%;
     --button-border: 38 93% 53%;
     --button-hover: 38 93% 53%;
     --button-hover-text: 0 0% 0%;
-
     --header: 0 0% 100% / 0.5;
     --dropdown: 0 0% 100%;
     --dropdown-text: 38 93% 53%;
     --dropdown-hover: 38 93% 53% / 0.1;
-
     --section: 0 0% 100%;
     --section-alt: 0 0% 96.1%;
-    --section-overlay: 0 0% 100% / 0.85;
-    --section-overlay-alt: 0 0% 100% / 0.9;
-
+    --section-overlay: 0 0% 100% / 1;
+    --section-overlay-alt: 0 0% 100% / 1;
     --form: 0 0% 100% / 0.9;
     --form-border: 0 0% 89.8%;
     --label: 0 0% 20%;
-
     --footer: 0 0% 98%;
     --footer-overlay: 0 0% 100% / 0.9;
     --footer-text: 0 0% 45%;
     --footer-copyright: 0 0% 45%;
-
     --cookie: 0 0% 100% / 0.95;
     --cookie-text: 0 0% 20%;
-
     --hero-overlay: 0 0% 0% / 0.3;
-
     --icon: 0 0% 0%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    /* Dark mode colors */
     --background: 0 0% 0%;
     --foreground: 0 0% 98%;
-
     --primary: 38 93% 53%;
     --primary-foreground: 0 0% 9%;
-
     --text: 0 0% 90%;
     --muted: 0 0% 63.9%;
-
     --heading: 38 93% 53%;
     --hero-subtext: 38 80% 60%;
-
     --border: 0 0% 20%;
     --input: 0 0% 15%;
     --input-border: 0 0% 25%;
     --input-text: 0 0% 90%;
-
     --card: 0 0% 10% / 0.8;
     --card-border: 0 0% 20%;
     --card-overlay: 0 0% 0% / 0.6;
-    --card-text: 0 0% 90%;
-
+    --card-text: 0 100% 100%;
     --button: 0 0% 0%;
     --button-text: 38 93% 53%;
     --button-border: 38 93% 53%;
     --button-hover: 38 93% 53%;
     --button-hover-text: 0 0% 0%;
-
     --header: 0 0% 0% / 0.5;
     --dropdown: 0 0% 0% / 0.9;
     --dropdown-text: 38 93% 53%;
     --dropdown-hover: 38 93% 53% / 0.1;
-
     --section: 0 0% 0%;
-    --section-alt: 0 0% 5%;
-    --section-overlay: 0 0% 0% / 0.85;
-    --section-overlay-alt: 0 0% 0% / 0.9;
-
+    --section-alt: 0 0% 0%;
+    --section-overlay: 0 0% 0% / 1;
+    --section-overlay-alt: 0 0% 0% / 1;
     --form: 0 0% 10% / 0.9;
     --form-border: 0 0% 20%;
     --label: 0 0% 90%;
-
     --footer: 0 0% 0%;
     --footer-overlay: 0 0% 0% / 0.9;
     --footer-text: 0 0% 98%;
     --footer-copyright: 0 0% 45%;
-
     --cookie: 0 0% 10% / 0.95;
     --cookie-text: 0 0% 90%;
-
     --hero-overlay: 0 0% 0% / 0.7;
-
     --icon: 0 0% 0%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Roboto", sans-serif;
   }
 }
 
-body {
-  @apply bg-background text-foreground;
-  font-family: "Roboto", sans-serif;
-}
-
-.nav-link {
-  @apply inline-flex h-9 items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10;
+@layer components {
+  .nav-link {
+    @apply inline-flex h-9 items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10;
+  }
 }
 
 @layer utilities {

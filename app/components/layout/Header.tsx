@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sun, Moon, ChevronDown } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
+import { NavLink, MobileNavLink } from "../navigation/NavLink";
+import { DropdownMenu } from "../navigation/DropdownMenu";
 
 interface HeaderProps {
   theme: string;
@@ -9,77 +11,68 @@ interface HeaderProps {
 }
 
 export default function Header({ theme, onThemeChange }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const [menuHeight, setMenuHeight] = useState(0);
+
+  useEffect(() => {
+    if (isMenuOpen && mobileMenuRef.current) {
+      setMenuHeight(mobileMenuRef.current.scrollHeight);
+    } else {
+      setMenuHeight(0);
+    }
+  }, [isMenuOpen]);
+
+  const standardsItems = [
+    { href: "/standards/quality", label: "Quality" },
+    { href: "/standards/certification", label: "Certification" },
+  ];
+
+  const mobileStandardsItems = standardsItems.map((item) => ({
+    ...item,
+    onClick: () => setIsMenuOpen(false),
+  }));
+
   return (
     <header className="sticky top-0 z-50 w-full bg-header backdrop-blur supports-[backdrop-filter]:bg-header/60">
-      <div className="container flex h-32 items-center justify-between">
+      <div className="w-full max-w-[1200px] mx-auto px-4 flex h-16 md:h-32 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src={theme === "dark" ? "/logo-white.svg" : "/logo-black.svg"}
             alt="Individual System Logo"
             width={200}
             height={50}
-            className="h-[50px] w-[200px]"
+            className="h-[30px] w-[120px] md:h-[50px] md:w-[200px]"
             priority
           />
         </Link>
 
-        <nav className="flex items-center space-x-8">
-          <Link
-            href="/"
-            className={`nav-link ${theme === "light" ? "text-primary hover:text-primary/80 hover:bg-primary/10" : ""}`}
-          >
+        {/* Mobile menu button */}
+        <button
+          className={`md:hidden p-2 rounded-md ${theme === "dark" ? "text-primary" : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          <NavLink href="/" theme={theme}>
             Home
-          </Link>
-          <Link
-            href="/team"
-            className={`nav-link ${theme === "light" ? "text-primary hover:text-primary/80 hover:bg-primary/10" : ""}`}
-          >
+          </NavLink>
+          <NavLink href="/team" theme={theme}>
             Team
-          </Link>
-          <Link
-            href="/impressionen"
-            className={`nav-link ${theme === "light" ? "text-primary hover:text-primary/80 hover:bg-primary/10" : ""}`}
-          >
+          </NavLink>
+          <NavLink href="/impressionen" theme={theme}>
             Impressionen
-          </Link>
-          <div className="relative group">
-            <button
-              className={`nav-link flex items-center ${
-                theme === "light" ? "text-primary hover:text-primary/80 hover:bg-primary/10" : ""
-              }`}
-            >
-              Standards <ChevronDown className="h-4 w-4 ml-1" />
-            </button>
-            <div
-              className={`absolute hidden group-hover:block w-[200px] p-2 rounded-md shadow-lg ${
-                theme === "dark" ? "bg-dropdown" : "bg-white border border-primary/20"
-              }`}
-            >
-              <Link
-                href="/standards/quality"
-                className={`block p-2 rounded-md transition-colors ${
-                  theme === "dark" ? "text-dropdown-text hover:bg-dropdown-hover" : "text-primary hover:bg-primary/10"
-                }`}
-              >
-                Quality
-              </Link>
-              <Link
-                href="/standards/certification"
-                className={`block p-2 rounded-md transition-colors ${
-                  theme === "dark" ? "text-dropdown-text hover:bg-dropdown-hover" : "text-primary hover:bg-primary/10"
-                }`}
-              >
-                Certification
-              </Link>
-            </div>
-          </div>
-          <Link
-            href="/impressum"
-            className={`nav-link ${theme === "light" ? "text-primary hover:text-primary/80 hover:bg-primary/10" : ""}`}
-          >
+          </NavLink>
+          <DropdownMenu theme={theme} label="Standards" items={standardsItems} />
+          <NavLink href="/impressum" theme={theme}>
             Impressum
-          </Link>
+          </NavLink>
         </nav>
+
         <button
           onClick={() => onThemeChange(theme === "dark" ? "light" : "dark")}
           className={`p-2 rounded-full transition-colors ${
@@ -91,6 +84,27 @@ export default function Header({ theme, onThemeChange }: HeaderProps) {
         >
           {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div className="md:hidden overflow-hidden transition-all duration-300" style={{ maxHeight: menuHeight }}>
+        <div ref={mobileMenuRef} className="w-full max-w-[1200px] mx-auto px-4 py-2">
+          <div className="px-4 py-2 space-y-2 w-fit">
+            <MobileNavLink href="/" theme={theme} onClick={() => setIsMenuOpen(false)}>
+              Home
+            </MobileNavLink>
+            <MobileNavLink href="/team" theme={theme} onClick={() => setIsMenuOpen(false)}>
+              Team
+            </MobileNavLink>
+            <MobileNavLink href="/impressionen" theme={theme} onClick={() => setIsMenuOpen(false)}>
+              Impressionen
+            </MobileNavLink>
+            <DropdownMenu theme={theme} label="Standards" items={mobileStandardsItems} />
+            <MobileNavLink href="/impressum" theme={theme} onClick={() => setIsMenuOpen(false)}>
+              Impressum
+            </MobileNavLink>
+          </div>
+        </div>
       </div>
     </header>
   );

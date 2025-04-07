@@ -31,10 +31,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative w-full">
       <Background theme={theme} />
       <Header theme={theme} onThemeChange={toggleTheme} />
-      <main className="flex-grow">
+      <main className="flex-grow w-full">
         <HeroSection theme={theme} />
         <CompanySection theme={theme} />
         <ServicesSection theme={theme} />

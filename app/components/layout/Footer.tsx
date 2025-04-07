@@ -7,7 +7,7 @@ interface FooterProps {
 
 export default function Footer({ theme }: FooterProps) {
   return (
-    <footer className="py-8 bg-footer border-t border-border relative overflow-hidden z-10">
+    <footer className="py-8 bg-footer relative overflow-hidden z-10">
       <div className="absolute inset-0">
         <Image
           src={theme === "dark" ? "/hero-bg.jpg" : "/hero-bg-white.jpg"}
@@ -15,7 +15,11 @@ export default function Footer({ theme }: FooterProps) {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-footer-overlay"></div>
+        <div
+          className={`absolute inset-0 bg-gradient-to-b ${
+            theme === "dark" ? "from-black via-black/50 to-transparent" : "from-white via-white/50 to-transparent"
+          }`}
+        />
       </div>
       <div className="container relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

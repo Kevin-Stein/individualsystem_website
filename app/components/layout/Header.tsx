@@ -11,7 +11,7 @@ interface HeaderProps {
 export default function Header({ theme, onThemeChange }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full bg-header backdrop-blur supports-[backdrop-filter]:bg-header/60">
-      <div className="container flex h-20 items-center justify-between">
+      <div className="container flex h-32 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src={theme === "dark" ? "/logo-white.svg" : "/logo-black.svg"}

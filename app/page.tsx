@@ -37,7 +37,7 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection theme={theme} />
         <CompanySection theme={theme} />
-        <ServicesSection />
+        <ServicesSection theme={theme} />
       </main>
       <Footer theme={theme} />
     </div>

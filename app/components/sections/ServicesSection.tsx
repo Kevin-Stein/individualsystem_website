@@ -1,10 +1,15 @@
-export default function ServicesSection() {
+interface ServicesSectionProps {
+  theme: string;
+}
+
+export default function ServicesSection({ theme }: ServicesSectionProps) {
   return (
-    <section className="py-16 bg-section relative overflow-hidden z-10">
-      <div className="container">
+    <section className="py-20 relative overflow-hidden">
+      <div className={`absolute inset-0 ${theme === "dark" ? "bg-black" : "bg-white"}`} />
+      <div className="container relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-heading mb-8">Unsere Dienstleistungen</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-card backdrop-blur-sm p-6 rounded-lg border border-card-border hover:border-primary transition-colors">
+          <div className={`p-6 rounded-lg border border-primary/30 ${theme === "dark" ? "bg-black" : "bg-card"}`}>
             <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,13 +32,13 @@ export default function ServicesSection() {
                 <path d="M7.5 7.5a6.5 6.5 0 0 0 0 9" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-heading mb-2">Ingenieurdienstleistung</h3>
-            <p className="text-muted">
+            <h3 className="text-2xl font-bold text-heading mb-2">Ingenieurdienstleistung</h3>
+            <p className={`text-card-text ${theme === "dark" ? "text-white" : ""}`}>
               Wir bieten umfassende Ingenieurdienstleistungen für die Entwicklung und Optimierung von technischen
               Systemen.
             </p>
           </div>
-          <div className="bg-card backdrop-blur-sm p-6 rounded-lg border border-card-border hover:border-primary transition-colors">
+          <div className={`p-6 rounded-lg border border-primary/30 ${theme === "dark" ? "bg-black" : "bg-card"}`}>
             <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,12 +56,12 @@ export default function ServicesSection() {
                 <path d="m7 17 4-4 4 4 6-6" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-heading mb-2">Projektmanagement</h3>
-            <p className="text-muted">
+            <h3 className="text-2xl font-bold text-heading mb-2">Projektmanagement</h3>
+            <p className={`text-card-text ${theme === "dark" ? "text-white" : ""}`}>
               Professionelles Projektmanagement für die erfolgreiche Umsetzung komplexer technischer Projekte.
             </p>
           </div>
-          <div className="bg-card backdrop-blur-sm p-6 rounded-lg border border-card-border hover:border-primary transition-colors">
+          <div className={`p-6 rounded-lg border border-primary/30 ${theme === "dark" ? "bg-black" : "bg-card"}`}>
             <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,8 +84,8 @@ export default function ServicesSection() {
                 <path d="M7.5 7.5a6.5 6.5 0 0 0 0 9" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-heading mb-2">Technische Beratung</h3>
-            <p className="text-muted">
+            <h3 className="text-2xl font-bold text-heading mb-2">Technische Beratung</h3>
+            <p className={`text-card-text ${theme === "dark" ? "text-white" : ""}`}>
               Fachkundige Beratung für technische Herausforderungen und innovative Lösungsansätze.
             </p>
           </div>

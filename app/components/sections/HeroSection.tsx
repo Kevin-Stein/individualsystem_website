@@ -8,18 +8,20 @@ interface HeroSectionProps {
 export default function HeroSection({ theme }: HeroSectionProps) {
   return (
     <section className="relative h-[600px] overflow-hidden pt-24">
-      <Image
-        src={theme === "dark" ? "/hero-bg.jpg" : "/hero-bg-white.jpg"}
-        alt="Hero Background"
-        fill
-        className="object-cover"
-        priority
-      />
-      <div
-        className={`absolute inset-0 bg-gradient-to-t ${
-          theme === "dark" ? "from-black via-black/50 to-transparent" : "from-white via-white/50 to-transparent"
-        }`}
-      />
+      <div className="absolute inset-0">
+        <Image
+          src={theme === "dark" ? "/hero-bg.jpg" : "/hero-bg-white.jpg"}
+          alt="Hero Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t ${
+            theme === "dark" ? "from-black via-black/50 to-transparent" : "from-white via-white/50 to-transparent"
+          }`}
+        />
+      </div>
       <div className="container relative flex h-full flex-col justify-center items-start">
         <Image
           src={theme === "dark" ? "/logo-white.svg" : "/logo-black.svg"}
@@ -29,8 +31,8 @@ export default function HeroSection({ theme }: HeroSectionProps) {
           className="mb-10 w-[350px] h-[90px] sm:w-[250px] sm:h-[60px] md:w-[400px] md:h-[100px]"
           priority
         />
-        <p className="mb-10 text-xl md:text-2xl text-white">
-          Ihr Partner für innovative Lösungen in der Technologiebranche
+        <p className={`text-2xl md:text-4xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-black"}`}>
+          Innovative Lösungen für Ihre technischen Herausforderungen
         </p>
         <Link
           href="/about"
